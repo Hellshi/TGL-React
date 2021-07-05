@@ -1,0 +1,15 @@
+.main {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login {
+  width: 50vw;
+  display: flex;
+}
+
+.forms {
+  width: 50vw;
+  display: flex;
+}
