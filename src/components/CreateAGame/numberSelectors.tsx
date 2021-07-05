@@ -1,46 +1,55 @@
 import React from 'react';
-import SelectNumber from './styles/selectNumber';
+import NumberHolder from './styles/selectNumber';
 
 const numberSelectors: React.FC = () => (
   <>
-    <div>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-      <SelectNumber>1</SelectNumber>
-      <SelectNumber>2</SelectNumber>
-      <SelectNumber>3</SelectNumber>
-    </div>
+    <NumberHolder>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+    </NumberHolder>
   </>
 );
 

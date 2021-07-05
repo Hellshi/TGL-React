@@ -45,6 +45,11 @@ const LeftContainer = styled.div`
     background-color: transparent;
     color: #27c383;
     cursor: pointer;
+    &:hover {
+      background-color: #27c383;
+      color: white;
+      transition: 0.4s all;
+    }
   }
 
   .buttons {
@@ -56,6 +61,11 @@ const LeftContainer = styled.div`
   .gameOptions.addToCart {
     background-color: #27c383;
     color: white;
+    &:hover {
+      background-color: #27c383dd;
+      border-color: #27c383dd;
+      color: white;
+    }
   }
   .gameOptions svg path {
     color: white;
