@@ -4,7 +4,6 @@ const NumberHolder = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
   button {
     margin-right: 0.4rem;
     cursor: pointer;

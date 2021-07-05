@@ -2,11 +2,9 @@ import styled from 'styled-components';
 
 const LeftContainer = styled.div`
   position: relative;
-  max-width: 50vw;
   display: flex;
   flex-direction: column;
   align-self: center;
-  left: 5vw;
   font-style: italic;
   height: 100%;
   gap: 2rem;
@@ -39,7 +37,6 @@ const LeftContainer = styled.div`
   .gameOptions {
     border: 2px solid #27c383;
     border-radius: 10px;
-    margin-left: 10px;
     padding: 15px;
     font-weight: 600;
     background-color: transparent;
@@ -50,6 +47,10 @@ const LeftContainer = styled.div`
       color: white;
       transition: 0.4s all;
     }
+  }
+
+  .buttonRigth > :not(:first-child) {
+    margin-left: 10px;
   }
 
   .buttons {
@@ -66,9 +67,9 @@ const LeftContainer = styled.div`
       border-color: #27c383dd;
       color: white;
     }
-  }
-  .gameOptions svg path {
-    color: white;
+    svg path {
+      color: white;
+    }
   }
 `;
 export default LeftContainer;
