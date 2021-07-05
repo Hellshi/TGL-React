@@ -1,17 +1,17 @@
 import React from 'react';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classes from '../styles/singIn.module.css';
+import SingInStyled from '../styles/singIn';
 
 const singInForm: React.FC = () => (
-  <div className={classes.formDiv}>
+  <SingInStyled>
     <h3>Registration</h3>
-    <div className={classes.FormInput}>
+    <div className="FormInput">
       <form>
         <input type="email" placeholder="Email" />
         <input type="text" placeholder="Name" />
         <input type="password" placeholder="Password" />
-        <div className={classes.buttonsForm}>
+        <div className="buttonsForm">
           <button type="submit">
             Register <FontAwesomeIcon icon={faArrowRight} />
           </button>
@@ -23,7 +23,7 @@ const singInForm: React.FC = () => (
       <FontAwesomeIcon icon={faArrowLeft} />
       Back
     </button>
-  </div>
+  </SingInStyled>
 );
 
 export default singInForm;

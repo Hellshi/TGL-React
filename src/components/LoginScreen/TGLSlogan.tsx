@@ -1,12 +1,12 @@
 import React from 'react';
-import classes from './styles/slogan.module.css';
+import SloganStyled from './styles/slogan';
 
 const TGLSlogan: React.FC = () => (
-  <div className={classes.mainSlogan}>
+  <SloganStyled>
     <p>The Greatest App</p>
     <span>for</span>
     <h1>Lottery</h1>
-  </div>
+  </SloganStyled>
 );
 
 export default TGLSlogan;

@@ -1,15 +1,15 @@
 import React from 'react';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classes from '../styles/resetPassword.module.css';
+import ResetPasswordStyled from '../styles/resetPassword';
 
 const resetPassword: React.FC = () => (
-  <div className={classes.formDiv}>
+  <ResetPasswordStyled>
     <h3>Reset Password</h3>
-    <div className={classes.FormInput}>
+    <div className="FormInput">
       <form>
         <input type="email" placeholder="Email" />
-        <div className={classes.buttonsForm}>
+        <div className="buttonsForm">
           <button type="submit">
             Send Link <FontAwesomeIcon icon={faArrowRight} />
           </button>
@@ -21,7 +21,7 @@ const resetPassword: React.FC = () => (
       <FontAwesomeIcon icon={faArrowLeft} />
       Back
     </button>
-  </div>
+  </ResetPasswordStyled>
 );
 
 export default resetPassword;

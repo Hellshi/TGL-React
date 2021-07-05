@@ -1,16 +1,16 @@
 import React from 'react';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classes from '../styles/login.module.css';
+import FormDiv from '../styles/login';
 
 const logginForm: React.FC = () => (
-  <div className={classes.formDiv}>
+  <FormDiv>
     <h3>Authentication</h3>
-    <div className={classes.FormInput}>
+    <div className="FormInput">
       <form>
         <input type="email" placeholder="Email" />
         <input type="password" placeholder="Password" />
-        <div className={classes.buttonsForm}>
+        <div className="buttonsForm">
           <button type="button">Forget my password</button>
           <button type="submit">
             Log In <FontAwesomeIcon icon={faArrowRight} />
@@ -22,7 +22,7 @@ const logginForm: React.FC = () => (
     <button type="button">
       Sing Up <FontAwesomeIcon icon={faArrowRight} />
     </button>
-  </div>
+  </FormDiv>
 );
 
 export default logginForm;

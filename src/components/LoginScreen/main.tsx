@@ -1,21 +1,21 @@
 import React from 'react';
-import classes from './styles/mainLoggin.module.css';
+import MainStyled from './styles/mainLoggin';
 import TGLSlogan from './TGLSlogan';
 import LogginForm from './forms/logginForm';
 import SingIn from './forms/singInForm';
 import ResetPassword from './forms/resetPassword';
 
 const Main: React.FC = () => (
-  <div className={classes.main}>
-    <div className={classes.forms}>
+  <MainStyled>
+    <div className="forms">
       <TGLSlogan />
     </div>
-    <div className={classes.login}>
+    <div className="login">
       {/* <LogginForm /> */}
       {/* <SingIn /> */}
       <ResetPassword />
     </div>
-  </div>
+  </MainStyled>
 );
 
 export default Main;
