@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const RecentGameComponentStyled = styled.div`
   display: flex;
   flex-direction: row;
+  margin-top: 1.8rem;
   &::before {
     content: '.';
     background-color: #7f3992;

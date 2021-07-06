@@ -2,11 +2,36 @@ import styled from 'styled-components';
 
 const recentGameMainStyled = styled.div`
   padding: 0rem 5rem;
-  border: 1px solid red;
+  min-height: 60vh;
   .topSelectors {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    h2 {
+      font-style: italic;
+      text-transform: uppercase;
+    }
+    span {
+      align-self: center;
+      margin-left: 40px;
+      font-style: italic;
+      font-size: 1rem;
+    }
+  }
+
+  .selectors {
+    button {
+      border-style: solid;
+      border-radius: 20px;
+      padding: 5px;
+      background-color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      outline: none;
+      min-width: 130px;
+      margin-left: 10px;
+    }
   }
 
   .selectors {
@@ -14,6 +39,25 @@ const recentGameMainStyled = styled.div`
     flex-direction: row;
     button {
       margin-right: 1rem;
+    }
+  }
+
+  .newBet {
+    button {
+      background-color: white;
+      border: none;
+      font-size: 1.5rem;
+      font-style: italic;
+      font-weight: 800;
+      color: #b5c401;
+      cursor: pointer;
+      path {
+        color: #b5c401;
+        margin-left: 20px;
+      }
+      svg {
+        margin-left: 10px;
+      }
     }
   }
 `;
