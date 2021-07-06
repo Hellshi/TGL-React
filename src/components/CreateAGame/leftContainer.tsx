@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styled from 'styled-components';
 import LeftContainer from './styles/leftContainer';
 import NumberSelectors from './numberSelectors';
 import Button from './styles/button';
@@ -73,7 +72,7 @@ const leftContainer: React.FC = () => {
       </div>
 
       <div className="numbers">
-        <NumberSelectors />
+        <NumberSelectors selectedGame={selectedGame.range} />
       </div>
 
       <div className="buttons">
