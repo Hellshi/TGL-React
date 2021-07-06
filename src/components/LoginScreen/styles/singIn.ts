@@ -14,10 +14,11 @@ const SingInStyled = styled.div`
   }
 
   .FormInput {
+    background-color: white;
     align-self: center;
     border-radius: 15px;
     width: 45%;
-    height: 50%;
+    height: 60%;
     border: 1px solid #00000014;
     padding: 10px 0 10px 0;
     margin: 1rem 0 1rem 0;
@@ -37,7 +38,10 @@ const SingInStyled = styled.div`
   }
 
   form input {
-    height: 4rem;
+    background-color: white;
+    height: 5rem;
+    padding: 20px;
+    padding: 20px;
     border-bottom: 2px solid #00000014;
     border-top: none;
     border-left: none;
@@ -45,7 +49,6 @@ const SingInStyled = styled.div`
   }
 
   input::placeholder {
-    padding-left: 20px;
     font-size: 1.2em;
   }
 
@@ -56,6 +59,13 @@ const SingInStyled = styled.div`
     background-color: white;
     font-size: 1.8rem;
     color: #b5c401;
+    path {
+      color: #b5c401;
+    }
+    svg {
+      margin-left: 10px;
+      margin-right: 0px;
+    }
   }
 
   button {
@@ -68,6 +78,11 @@ const SingInStyled = styled.div`
     font-weight: 900;
     font-style: italic;
     cursor: pointer;
+    background-color: transparent;
+    svg {
+      background-color: transparent;
+      margin-right: 10px;
+    }
   }
 `;
 export default SingInStyled;

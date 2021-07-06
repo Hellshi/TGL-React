@@ -1,17 +1,17 @@
 import React from 'react';
 import MainStyled from './styles/mainLoggin';
 import TGLSlogan from './TGLSlogan';
-import LogginForm from './forms/logginForm';
+import SingIn from './forms/singInForm';
 
-const Main: React.FC = () => (
+const singInMain: React.FC = () => (
   <MainStyled>
     <div className="forms">
       <TGLSlogan />
     </div>
     <div className="login">
-      <LogginForm />
+      <SingIn />
     </div>
   </MainStyled>
 );
 
-export default Main;
+export default singInMain;

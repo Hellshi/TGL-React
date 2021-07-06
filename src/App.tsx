@@ -6,6 +6,8 @@ import Main from './components/LoginScreen/main';
 import classes from './app.module.css';
 import CreateAGame from './components/CreateAGame/createAGameMain';
 import RecentGame from './components/RecentGames/recentGameMain';
+import ResetPassword from './components/LoginScreen/resetPassword';
+import SingIn from './components/LoginScreen/singInMain';
 
 const App: React.FC = () => (
   <div className={classes.App}>
@@ -20,6 +22,12 @@ const App: React.FC = () => (
         </Route>
         <Route path="/recent-games">
           <RecentGame />
+        </Route>
+        <Route path="/reset-password">
+          <ResetPassword />
+        </Route>
+        <Route path="/sing-in">
+          <SingIn />
         </Route>
       </Switch>
     </Router>

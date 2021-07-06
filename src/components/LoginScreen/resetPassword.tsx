@@ -1,17 +1,17 @@
 import React from 'react';
 import MainStyled from './styles/mainLoggin';
 import TGLSlogan from './TGLSlogan';
-import LogginForm from './forms/logginForm';
+import ResetPassword from './forms/resetPassword';
 
-const Main: React.FC = () => (
+const resetPasswordMain: React.FC = () => (
   <MainStyled>
     <div className="forms">
       <TGLSlogan />
     </div>
     <div className="login">
-      <LogginForm />
+      <ResetPassword />
     </div>
   </MainStyled>
 );
 
-export default Main;
+export default resetPasswordMain;

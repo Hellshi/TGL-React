@@ -17,10 +17,10 @@ const ResetPassword = styled.div`
     align-self: center;
     border-radius: 15px;
     width: 45%;
-    height: 30%;
     border: 1px solid #00000014;
     padding: 10px 0 10px 0;
     margin: 1rem 0 1rem 0;
+    background-color: white;
   }
 
   form {
@@ -33,19 +33,19 @@ const ResetPassword = styled.div`
   .buttonsForm {
     display: flex;
     flex-direction: column;
-    height: 30%;
   }
 
   form input {
     height: 4rem;
     border-bottom: 2px solid #00000014;
+    padding: 20px;
+    background-color: white;
     border-top: none;
     border-left: none;
     border-right: none;
   }
 
   input::placeholder {
-    padding-left: 20px;
     font-size: 1.2em;
   }
 
@@ -56,6 +56,12 @@ const ResetPassword = styled.div`
     background-color: white;
     font-size: 1.8rem;
     color: #b5c401;
+    path {
+      color: #b5c401;
+    }
+    svg {
+      margin-left: 10px;
+    }
   }
 
   button {
@@ -68,6 +74,10 @@ const ResetPassword = styled.div`
     font-weight: 900;
     font-style: italic;
     cursor: pointer;
+    background-color: transparent;
+    svg {
+      margin-right: 10px;
+    }
   }
 `;
 export default ResetPassword;

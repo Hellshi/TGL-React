@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
 const FormDiv = styled.div`
-  .formDiv {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
 
   h3 {
     align-self: center;
@@ -23,6 +21,7 @@ const FormDiv = styled.div`
     border: 1px solid #00000014;
     padding: 10px 0 10px 0;
     margin: 1rem 0 1rem 0;
+    background-color: white;
   }
 
   form {
@@ -30,24 +29,27 @@ const FormDiv = styled.div`
     flex-direction: column;
     border-color: teal;
     height: 100%;
+    background-color: white;
   }
 
   .buttonsForm {
     display: flex;
     flex-direction: column;
     height: 55%;
+    background-color: white;
   }
 
   form input {
-    height: 4rem;
+    height: 8rem;
+    padding: 20px;
     border-bottom: 2px solid #00000014;
     border-top: none;
     border-left: none;
     border-right: none;
+    background-color: white;
   }
 
   input::placeholder {
-    padding-left: 20px;
     font-size: 1.2em;
   }
 
@@ -55,7 +57,12 @@ const FormDiv = styled.div`
     width: 100%;
     border: none;
     background-color: white;
-    font-size: 1rem;
+    font-size: 1.8rem;
+    background-color: transparent;
+    color: #b5c401;
+    path {
+      color: #b5c401;
+    }
   }
 
   button {
@@ -67,6 +74,18 @@ const FormDiv = styled.div`
     font-size: 1.8rem;
     font-weight: 900;
     font-style: italic;
+    background-color: transparent;
+    svg {
+      margin-left: 10px;
+    }
+    cursor: pointer;
+  }
+
+  .reset {
+    text-align: end;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: #c1c1c1;
   }
 `;
 
