@@ -9,18 +9,6 @@ const LeftContainer = styled.div`
   height: 100%;
   gap: 2rem;
 
-  .buttonsSelectors {
-    border-style: solid;
-    border-radius: 20px;
-    padding: 5px;
-    background-color: white;
-    font-size: 15px;
-    font-weight: bold;
-    outline: none;
-    min-width: 130px;
-    margin-bottom: 20px;
-  }
-
   .numbers {
     padding-bottom: 10px;
     min-width: 240px;
@@ -34,6 +22,10 @@ const LeftContainer = styled.div`
     text-transform: uppercase;
   }
 
+  .buttonsDiv {
+    gap: 10px;
+    display: flex;
+  }
   .gameOptions {
     border: 2px solid #27c383;
     border-radius: 10px;

@@ -11,8 +11,8 @@ import SingIn from './components/LoginScreen/singInMain';
 
 const App: React.FC = () => (
   <div className={classes.App}>
-    <Header />
     <Router>
+      <Header />
       <Switch>
         <Route path="/" exact>
           <Main />
@@ -30,9 +30,8 @@ const App: React.FC = () => (
           <SingIn />
         </Route>
       </Switch>
+      <Footer />
     </Router>
-
-    <Footer />
   </div>
 );
 
