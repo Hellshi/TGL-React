@@ -4,27 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import LeftContainer from './styles/leftContainer';
 import NumberSelectors from './numberSelectors';
-
-const Button = styled.button<{ color: string }>`
-  border-style: solid;
-  border-radius: 20px;
-  cursor: pointer;
-  padding: 5px;
-  border-color: ${({ color }) => color};
-  background-color: white;
-  color: ${({ color }) => color};
-  font-size: 15px;
-  font-weight: bold;
-  outline: none;
-  min-width: 130px;
-  margin-bottom: 20px;
-
-  &:hover {
-    background-color: ${({ color }) => color};
-    color: white;
-    transition: 0.4s all;
-  }
-`;
+import Button from './styles/button';
 
 interface Game {
   type: string;
@@ -38,16 +18,35 @@ interface Game {
 
 const leftContainer: React.FC = () => {
   const [games, setGames] = useState<Game[]>([]);
+  const [selectedGame, setSelectedGame] = useState<Game>({
+    type: '',
+    description: '',
+    range: 10,
+    price: 20,
+    'max-number': 1,
+    color: '',
+    'min-cart-value': 1,
+  });
   useEffect(() => {
     fetch('http://localhost:3333/types')
       .then((response) => response.json())
-      .then((data) => setGames(data));
+      .then((data) => {
+        setGames(data);
+        setSelectedGame(data[0]);
+      });
   }, []);
+
+  const handleSelect = (type: string) => {
+    const current = games.find((game: Game) => game.type === type);
+    if (current) {
+      setSelectedGame(current);
+    }
+  };
   return (
     <LeftContainer>
       <div className="title">
         <h2>
-          New bet for <span>Lotofácil</span>
+          New bet for <span>{selectedGame.type}</span>
         </h2>
       </div>
 
@@ -58,8 +57,11 @@ const leftContainer: React.FC = () => {
           {games.map((game) => (
             <Button
               type="button"
-              className={`buttonsSelectors ${game.type}`}
+              id={game.type}
+              key={game.type}
               color={game.color}
+              onClick={() => handleSelect(game.type)}
+              active={selectedGame.type === game.type ? 1 : 0}
             >
               {game.type}
             </Button>
@@ -67,11 +69,7 @@ const leftContainer: React.FC = () => {
         </div>
 
         <h4>Fill your bet!</h4>
-        <span className="gameRules">
-          Escolha 15 números para apostar na lotofácil. Você ganha acertando 11,
-          12, 13, 14 ou 15 números. São muitas chances de ganhar, e agora você
-          joga de onde estiver!
-        </span>
+        <span className="gameRules">{selectedGame.description}</span>
       </div>
 
       <div className="numbers">
