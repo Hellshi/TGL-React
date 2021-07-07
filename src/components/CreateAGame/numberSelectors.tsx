@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NumberHolder from './styles/selectNumber';
 
 const numberSelectors = ({
   selectedGame,
   color,
   maxNumber,
+  selectedNumbers,
+  setSelectedNumbers,
 }: {
   selectedGame: number;
   color: string;
   maxNumber: number;
+  selectedNumbers: (number | string)[];
+  setSelectedNumbers: (
+    newArr:
+      | (string | number)[]
+      | ((prev: (string | number)[]) => (string | number)[])
+  ) => void;
 }): JSX.Element => {
-  const [selectedNumbers, setSelectedNumbers] = useState<(number | string)[]>(
-    []
-  );
   const handleSelectButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { value } = e.currentTarget;
     if (
@@ -20,7 +25,10 @@ const numberSelectors = ({
       selectedNumbers.length < maxNumber
     ) {
       e.currentTarget.className = 'selected';
-      setSelectedNumbers((currentArr) => [...currentArr, value]);
+      setSelectedNumbers((currentArr: (number | string)[]) => [
+        ...currentArr,
+        value,
+      ]);
     } else if (selectedNumbers.indexOf(value) !== -1) {
       e.currentTarget.className = '';
       setSelectedNumbers((currentArr) =>
@@ -28,8 +36,7 @@ const numberSelectors = ({
       );
     }
   };
-  // eslint-disable-next-line no-console
-  console.log(selectedNumbers);
+
   const buttons = [];
   for (let i = 1; i <= selectedGame; i += 1) {
     buttons.push(

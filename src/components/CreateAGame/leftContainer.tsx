@@ -35,6 +35,10 @@ const leftContainer: React.FC = () => {
       });
   }, []);
 
+  const [selectedNumbers, setSelectedNumbers] = useState<(number | string)[]>(
+    []
+  );
+
   const handleSelect = (type: string) => {
     const current = games.find((game: Game) => game.type === type);
     if (current) {
@@ -76,6 +80,8 @@ const leftContainer: React.FC = () => {
           selectedGame={selectedGame.range}
           color={selectedGame.color}
           maxNumber={selectedGame['max-number']}
+          selectedNumbers={selectedNumbers}
+          setSelectedNumbers={setSelectedNumbers}
         />
       </div>
 
