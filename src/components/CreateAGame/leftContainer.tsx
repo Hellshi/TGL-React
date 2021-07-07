@@ -55,13 +55,15 @@ const leftContainer = ({
   };
 
   const generateRandomGameHandler = () => {
-    for (let i = 0; i < selectedGame['max-number']; i += 1) {
+    const numbers = [];
+    while (numbers.length < selectedGame['max-number']) {
       const randomNumber = Math.floor(Math.random() * selectedGame.range);
 
-      if (selectedNumbers.indexOf(randomNumber) === -1 && randomNumber > 0) {
-        setSelectedNumbers((currentArr) => [...currentArr, randomNumber]);
+      if (numbers.indexOf(randomNumber) === -1 && randomNumber > 0) {
+        numbers.push(randomNumber);
       }
     }
+    setSelectedNumbers(numbers);
   };
 
   const clearClearGame = () => {
@@ -87,6 +89,7 @@ const leftContainer = ({
         price: selectedGame.price,
       },
     ]);
+    setSelectedNumbers([]);
   };
   return (
     <LeftContainer>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import RigthContainer from './rigthContainer';
 import LeftContainer from './leftContainer';
 import Main from './styles/createAGameMain';

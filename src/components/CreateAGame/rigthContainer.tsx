@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch } from 'react-redux';
 import RigthContainer from './styles/rigthContainer';
 import Games from './games';
+import { CartActions } from '../../store/cart-slice';
+
 import { CartItem } from './createAGameMain';
 
 const rigthContainer = ({
@@ -14,6 +17,7 @@ const rigthContainer = ({
     cartItem: CartItem[] | ((prevCart: CartItem[]) => CartItem[])
   ) => void;
 }): JSX.Element => {
+  const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     setTotalPrice(
@@ -23,6 +27,11 @@ const rigthContainer = ({
 
   const deleteItemHandler = (id: number) =>
     setCart(cart.filter((item, index) => index !== id));
+
+  const saveGamesHandler = () => {
+    dispatch(CartActions.buyGames(cart));
+    setCart([]);
+  };
 
   return (
     <>
@@ -50,7 +59,7 @@ const rigthContainer = ({
             </span>
           </h2>
         </div>
-        <button type="button" className="save">
+        <button type="button" className="save" onClick={saveGamesHandler}>
           Save <FontAwesomeIcon icon={faArrowRight} />
         </button>
       </RigthContainer>
