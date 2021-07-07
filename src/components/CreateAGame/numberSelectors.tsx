@@ -19,18 +19,16 @@ const numberSelectors = ({
   ) => void;
 }): JSX.Element => {
   const handleSelectButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { value } = e.currentTarget;
+    const value = +e.currentTarget.value;
     if (
       selectedNumbers.indexOf(value) === -1 &&
       selectedNumbers.length < maxNumber
     ) {
-      e.currentTarget.className = 'selected';
       setSelectedNumbers((currentArr: (number | string)[]) => [
         ...currentArr,
         value,
       ]);
-    } else if (selectedNumbers.indexOf(value) !== -1) {
-      e.currentTarget.className = '';
+    } else {
       setSelectedNumbers((currentArr) =>
         currentArr.filter((number) => number !== value)
       );
@@ -40,7 +38,13 @@ const numberSelectors = ({
   const buttons = [];
   for (let i = 1; i <= selectedGame; i += 1) {
     buttons.push(
-      <button type="button" value={i} key={`${i}`} onClick={handleSelectButton}>
+      <button
+        type="button"
+        value={i}
+        key={`${i}`}
+        onClick={handleSelectButton}
+        className={selectedNumbers.indexOf(i) > -1 ? 'selected' : ''}
+      >
         {i}
       </button>
     );

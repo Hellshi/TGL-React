@@ -45,6 +45,20 @@ const leftContainer: React.FC = () => {
       setSelectedGame(current);
     }
   };
+
+  const generateRandomGameHandler = () => {
+    for (let i = 0; i < selectedGame['max-number']; i += 1) {
+      const randomNumber = Math.floor(Math.random() * selectedGame.range);
+
+      if (selectedNumbers.indexOf(randomNumber) === -1 && randomNumber > 0) {
+        setSelectedNumbers((currentArr) => [...currentArr, randomNumber]);
+      }
+    }
+  };
+
+  const clearClearGame = () => {
+    setSelectedNumbers([]);
+  };
   return (
     <LeftContainer>
       <div className="title">
@@ -87,10 +101,18 @@ const leftContainer: React.FC = () => {
 
       <div className="buttons">
         <div className="buttonRigth">
-          <button type="button" className="gameOptions">
+          <button
+            type="button"
+            className="gameOptions"
+            onClick={generateRandomGameHandler}
+          >
             Complete Game
           </button>
-          <button type="button" className="gameOptions">
+          <button
+            type="button"
+            className="gameOptions"
+            onClick={clearClearGame}
+          >
             Clear Game
           </button>
         </div>
