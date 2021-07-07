@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LeftContainer from './styles/leftContainer';
 import NumberSelectors from './numberSelectors';
 import Button from './styles/button';
+import { CartItem } from './createAGameMain';
 
 interface Game {
   type: string;
@@ -15,7 +16,13 @@ interface Game {
   'min-cart-value': number;
 }
 
-const leftContainer: React.FC = () => {
+const leftContainer = ({
+  setCart,
+}: {
+  setCart: (
+    cartItem: CartItem[] | ((prevCart: CartItem[]) => CartItem[])
+  ) => void;
+}): JSX.Element => {
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game>({
     type: '',
@@ -44,6 +51,7 @@ const leftContainer: React.FC = () => {
     if (current) {
       setSelectedGame(current);
     }
+    setSelectedNumbers([]);
   };
 
   const generateRandomGameHandler = () => {
@@ -58,6 +66,27 @@ const leftContainer: React.FC = () => {
 
   const clearClearGame = () => {
     setSelectedNumbers([]);
+  };
+
+  const handleAddToCart = () => {
+    if (selectedNumbers.length < selectedGame['max-number']) {
+      // eslint-disable-next-line no-console
+      console.log(
+        `Opps, selecione mais ${
+          selectedGame['max-number'] - selectedNumbers.length
+        } números para continuar!`
+      );
+      return;
+    }
+    setCart((prevCart) => [
+      ...prevCart,
+      {
+        type: selectedGame.type,
+        numbers: selectedNumbers,
+        color: selectedGame.color,
+        price: selectedGame.price,
+      },
+    ]);
   };
   return (
     <LeftContainer>
@@ -116,7 +145,11 @@ const leftContainer: React.FC = () => {
             Clear Game
           </button>
         </div>
-        <button type="button" className="gameOptions addToCart">
+        <button
+          type="button"
+          className="gameOptions addToCart"
+          onClick={handleAddToCart}
+        >
           <FontAwesomeIcon icon={faShoppingCart} color="#27c383" /> Add to cart
         </button>
       </div>
