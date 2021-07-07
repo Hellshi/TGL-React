@@ -72,7 +72,11 @@ const leftContainer: React.FC = () => {
       </div>
 
       <div className="numbers">
-        <NumberSelectors selectedGame={selectedGame.range} />
+        <NumberSelectors
+          selectedGame={selectedGame.range}
+          color={selectedGame.color}
+          maxNumber={selectedGame['max-number']}
+        />
       </div>
 
       <div className="buttons">

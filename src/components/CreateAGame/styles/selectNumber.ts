@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const NumberHolder = styled.div`
+const NumberHolder = styled.div<{ color: string }>`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -17,8 +17,12 @@ const NumberHolder = styled.div`
     color: white;
     background-color: #adc0c4;
     &:hover {
-      background-color: #27c383;
+      background-color: ${({ color }) => color};
       transition: 0.4s all;
+    }
+
+    &.selected {
+      background-color: ${({ color }) => color};
     }
   }
 `;
