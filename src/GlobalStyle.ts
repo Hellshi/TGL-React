@@ -45,5 +45,9 @@ textarea:focus,
 button:focus {
   outline: none;
 }
-
+@media (max-width: 1024px) {
+  #root {
+    justify-content: start;
+  }
+}
 `;

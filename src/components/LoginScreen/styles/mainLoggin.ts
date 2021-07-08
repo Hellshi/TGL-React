@@ -6,13 +6,20 @@ const Main = styled.div`
   justify-content: space-between;
 
   .login {
-    width: 50vw;
+    min-width: 50vw;
     display: flex;
   }
 
   .forms {
-    width: 50vw;
+    min-width: 50vw;
     display: flex;
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column-reverse;
+    .login {
+      width: 100vw;
+    }
   }
 `;
 export default Main;

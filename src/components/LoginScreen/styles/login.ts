@@ -16,7 +16,7 @@ const FormDiv = styled.div`
   .FormInput {
     align-self: center;
     border-radius: 15px;
-    width: 45%;
+    min-width: 45%;
     height: 50%;
     border: 1px solid #00000014;
     padding: 10px 0 10px 0;
@@ -86,6 +86,13 @@ const FormDiv = styled.div`
     font-size: 0.8rem;
     font-weight: 300;
     color: #c1c1c1;
+  }
+
+  @media (max-width: 1024px) {
+    button,
+    form button {
+      font-size: 1.3rem;
+    }
   }
 `;
 

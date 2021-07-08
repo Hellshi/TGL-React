@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Header = styled.header`
+const Header = styled.header<{ open: number }>`
   display: flex;
   padding: 0% 5% 0% 5%;
   justify-content: space-between;
@@ -32,6 +32,40 @@ const Header = styled.header`
     padding-top: 10px;
     border-bottom: 5px solid #b5c401;
     border-radius: 4%;
+    svg {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    padding: 0;
+    .leftBox,
+    .rightBox {
+      display: flex;
+      flex-direction: column;
+      a:not(.logo) {
+        transition: 0.4s all;
+        height: ${({ open }) => (open > 0 ? '40px' : '0')};
+        transform: ${({ open }) =>
+          open > 0 ? 'translateY(0px)' : 'translateY(-256px)'};
+        z-index: -1;
+      }
+    }
+    .logo {
+      outline: none;
+      display: flex;
+      justify-content: space-between;
+      background-color: white;
+      svg {
+        display: block;
+      }
+      border-left: 5px solid #b5c401;
+      border-radius: 2%;
+      border-bottom: none;
+      padding: 5px 15px;
+      font-size: 1.6;
+    }
   }
 `;
 

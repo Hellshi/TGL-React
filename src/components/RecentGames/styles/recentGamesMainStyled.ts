@@ -45,6 +45,18 @@ const recentGameMainStyled = styled.div`
       }
     }
   }
+
+  @media (max-width: 1024px) {
+    .topSelectors,
+    .selectors {
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    span {
+      align-self: center;
+    }
+  }
 `;
 
 export default recentGameMainStyled;

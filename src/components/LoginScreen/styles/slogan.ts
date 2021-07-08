@@ -6,8 +6,6 @@ const SloganStyled = styled.div`
   justify-content: center;
   text-align: center;
   width: 100%;
-  box-sizing: border-box;
-  vertical-align: middle;
   font-style: italic;
   font-weight: 800;
 
@@ -32,6 +30,23 @@ const SloganStyled = styled.div`
     padding: 5px;
     margin-top: 20px;
     align-self: center;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+    p {
+      font-size: 1.25rem;
+      line-height: 1.5rem;
+      width: 100%;
+    }
+    h1 {
+      font-size: 2rem;
+      line-height: 3.5rem;
+    }
+    span {
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
   }
 `;
 export default SloganStyled;
