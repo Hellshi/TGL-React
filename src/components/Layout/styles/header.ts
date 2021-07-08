@@ -38,6 +38,7 @@ const Header = styled.header<{ open: number }>`
   }
 
   @media (max-width: 1024px) {
+    height: ${({ open }) => (open > 0 ? 'auto' : '50px')};
     flex-direction: column;
     padding: 0;
     .leftBox,
@@ -46,10 +47,13 @@ const Header = styled.header<{ open: number }>`
       flex-direction: column;
       a:not(.logo) {
         transition: 0.4s all;
-        height: ${({ open }) => (open > 0 ? '40px' : '0')};
+        /* height: $ {({ open }) => (open > 0 ? '40px' : '0')}; */
         transform: ${({ open }) =>
           open > 0 ? 'translateY(0px)' : 'translateY(-256px)'};
       }
+    }
+    .rightBox:last-child {
+      padding-bottom: 15px;
     }
     .logo {
       outline: none;
