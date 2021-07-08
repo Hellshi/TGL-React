@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { useSelector } from 'react-redux';
 import Header from './components/Layout/header';
 import Footer from './components/Layout/footer';
 import Main from './components/LoginScreen/main';
@@ -21,7 +27,13 @@ export interface Game {
   'min-cart-value': number;
 }
 
+export interface RootState {
+  auth: {
+    isAuth: boolean;
+  };
+}
 const App = (): JSX.Element => {
+  const auth = useSelector((state: RootState) => state.auth.isAuth);
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game>({
     type: '',
@@ -49,10 +61,10 @@ const App = (): JSX.Element => {
             <Main />
           </Route>
           <Route path="/create-game">
-            <CreateAGame />
+            {!auth ? <Redirect to="/" /> : <CreateAGame />}
           </Route>
           <Route path="/recent-games">
-            <RecentGame allGames={games} />
+            {!auth ? <Redirect to="/" /> : <RecentGame allGames={games} />}
           </Route>
           <Route path="/reset-password">
             <ResetPassword />

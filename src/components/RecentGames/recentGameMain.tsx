@@ -23,6 +23,8 @@ interface RootState {
 
 const recentGameMain = ({ allGames }: { allGames: Game[] }): JSX.Element => {
   const cart = useSelector((state: RootState) => state.cart.buyedGames);
+  // eslint-disable-next-line no-console
+  console.log(cart);
   const [selectedGame, setSelectedGame] = useState('');
   const [filteredCart, setFilteredCart] = useState(cart);
   const history = useHistory();

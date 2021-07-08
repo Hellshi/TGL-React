@@ -2,13 +2,18 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch } from 'react-redux';
 import FormDiv from '../styles/login';
+import { AuthActions } from '../../../store/auth-slice';
 
 const logginForm: React.FC = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     history.push('/create-game');
+    dispatch(AuthActions.auth());
+    history.push('/recent-games');
   };
   return (
     <FormDiv onSubmit={handleSubmit}>
