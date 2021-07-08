@@ -34,6 +34,12 @@ const rigthContainer = ({
       toast.warning('Opa, adicione algum jogo ao carrinho primeiro!');
       return;
     }
+    /*     if (totalPrice < 30) {
+      toast.warning(
+        'Opa, para completar essa ação seu carrinho deve ter um valor maior que R$30,00. Continue comprando e tente novamente'
+      );
+      return;
+    } */
     toast.success('Jogo adicionado com sucesso!');
     dispatch(CartActions.buyGames(cart));
     setCart([]);
@@ -61,7 +67,12 @@ const rigthContainer = ({
             CART
             <span className="price">
               {' '}
-              {cart.length === 0 ? 'Your cart is empty :(' : totalPrice}
+              {cart.length === 0
+                ? 'Your cart is empty :('
+                : totalPrice.toLocaleString('pt-br', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
             </span>
           </h2>
         </div>
