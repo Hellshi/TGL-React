@@ -1,16 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Header from './components/Layout/header';
 import Footer from './components/Layout/footer';
 import Main from './components/LoginScreen/main';
-import classes from './app.module.css';
 import CreateAGame from './components/CreateAGame/createAGameMain';
 import RecentGame from './components/RecentGames/recentGameMain';
 import ResetPassword from './components/LoginScreen/resetPassword';
 import SingIn from './components/LoginScreen/singInMain';
+import GlobalStyle from './GlobalStyle';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => (
-  <div className={classes.App}>
+  <>
     <Router>
       <Header />
       <Switch>
@@ -32,7 +34,9 @@ const App: React.FC = () => (
       </Switch>
       <Footer />
     </Router>
-  </div>
+    <ToastContainer />
+    <GlobalStyle />
+  </>
 );
 
 export default App;

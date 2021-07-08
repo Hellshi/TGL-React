@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import RigthContainer from './styles/rigthContainer';
 import Games from './games';
 import { CartActions } from '../../store/cart-slice';
@@ -29,6 +30,10 @@ const rigthContainer = ({
     setCart(cart.filter((item, index) => index !== id));
 
   const saveGamesHandler = () => {
+    if (cart.length === 0) {
+      toast.warning('Opa, adicione algum jogo ao carrinho primeiro!');
+      return;
+    }
     dispatch(CartActions.buyGames(cart));
     setCart([]);
   };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast } from 'react-toastify';
 import LeftContainer from './styles/leftContainer';
 import NumberSelectors from './numberSelectors';
 import Button from './styles/button';
@@ -72,8 +73,7 @@ const leftContainer = ({
 
   const handleAddToCart = () => {
     if (selectedNumbers.length < selectedGame['max-number']) {
-      // eslint-disable-next-line no-console
-      console.log(
+      toast.error(
         `Opps, selecione mais ${
           selectedGame['max-number'] - selectedNumbers.length
         } números para continuar!`

@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import NumberHolder from './styles/selectNumber';
 
 const numberSelectors = ({
@@ -28,9 +29,13 @@ const numberSelectors = ({
         ...currentArr,
         value,
       ]);
-    } else {
+    } else if (selectedNumbers.indexOf(value) !== -1) {
       setSelectedNumbers((currentArr) =>
         currentArr.filter((number) => number !== value)
+      );
+    } else {
+      toast.warning(
+        'Oops. Parece que você já adicionou o número máximo de números. Adicione ao carrinho!'
       );
     }
   };
