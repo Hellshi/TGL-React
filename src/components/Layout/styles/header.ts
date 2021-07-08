@@ -49,7 +49,6 @@ const Header = styled.header<{ open: number }>`
         height: ${({ open }) => (open > 0 ? '40px' : '0')};
         transform: ${({ open }) =>
           open > 0 ? 'translateY(0px)' : 'translateY(-256px)'};
-        z-index: -1;
       }
     }
     .logo {

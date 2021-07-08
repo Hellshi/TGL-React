@@ -7,5 +7,9 @@ const Main = styled.div`
   align-items: center;
   padding: 5vw;
   gap: 5vw;
+
+  @media (max-width: 1024px) {
+    flex-direction: column-reverse;
+  }
 `;
 export default Main;

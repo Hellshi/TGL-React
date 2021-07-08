@@ -63,5 +63,19 @@ const LeftContainer = styled.div`
       color: white;
     }
   }
+
+  @media (max-width: 1024px) {
+    max-width: 100%;
+    flex-direction: column;
+    .buttonsDiv,
+    .buttons {
+      flex-direction: column;
+    }
+    .buttonRigth {
+      display: flex;
+      margin-bottom: 1rem;
+      justify-content: space-between;
+    }
+  }
 `;
 export default LeftContainer;

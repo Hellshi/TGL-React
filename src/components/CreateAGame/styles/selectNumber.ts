@@ -25,5 +25,12 @@ const NumberHolder = styled.div<{ color: string }>`
       background-color: ${({ color }) => color};
     }
   }
+
+  @media (max-width: 1024px) {
+    button {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
 `;
 export default NumberHolder;

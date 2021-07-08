@@ -53,8 +53,8 @@ const recentGameMainStyled = styled.div`
       justify-content: center;
     }
 
-    span {
-      align-self: center;
+    .selectors span {
+      margin-right: 45px;
     }
   }
 `;
