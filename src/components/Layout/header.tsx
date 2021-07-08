@@ -11,7 +11,7 @@ const Header: React.FC = () => (
       <Link to="/">Home</Link>
     </div>
     <div className="rightBox">
-      <Link to="/create-game">Account</Link>
+      <Link to="/recent-games">Account</Link>
       <Link to="/">LogOut</Link>
     </div>
   </HD>

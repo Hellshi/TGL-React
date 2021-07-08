@@ -17,6 +17,8 @@ export default createGlobalStyle`
   min-height: 100vh;
 }
 
+.Toastify__toast-container--top-center {
+}
 .Toastify__toast--error {
   background-color: white;
   .Toastify__progress-bar {
@@ -30,6 +32,12 @@ export default createGlobalStyle`
   background-color: #ffde03;
 }
 }
+
+.Toastify__toast--success {
+  background-color: white;
+  .Toastify__progress-bar {
+  background-color:  #8db600;
+}}
 
 input:focus,
 select:focus,

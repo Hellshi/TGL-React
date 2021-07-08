@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-const RecentGameComponentStyled = styled.div`
+const RecentGameComponentStyled = styled.div<{ color: string }>`
   display: flex;
   flex-direction: row;
   margin-top: 1.8rem;
   &::before {
     content: '.';
-    background-color: #7f3992;
-    color: #7f3992;
+    background-color: ${({ color }) => color};
+    color: ${({ color }) => color};
     width: 5px;
     border-radius: 20px;
     margin-right: 8px;
@@ -22,6 +22,11 @@ const RecentGameComponentStyled = styled.div`
   p {
     font-size: 1.2rem;
     font-style: italic;
+    font-weight: bolder;
+  }
+
+  .gameType {
+    color: ${({ color }) => color};
     font-weight: bolder;
   }
 `;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Header from './components/Layout/header';
@@ -11,32 +11,61 @@ import SingIn from './components/LoginScreen/singInMain';
 import GlobalStyle from './GlobalStyle';
 import 'react-toastify/dist/ReactToastify.css';
 
-const App: React.FC = () => (
-  <>
-    <Router>
-      <Header />
-      <Switch>
-        <Route path="/" exact>
-          <Main />
-        </Route>
-        <Route path="/create-game">
-          <CreateAGame />
-        </Route>
-        <Route path="/recent-games">
-          <RecentGame />
-        </Route>
-        <Route path="/reset-password">
-          <ResetPassword />
-        </Route>
-        <Route path="/sing-in">
-          <SingIn />
-        </Route>
-      </Switch>
-      <Footer />
-    </Router>
-    <ToastContainer />
-    <GlobalStyle />
-  </>
-);
+export interface Game {
+  type: string;
+  description: string;
+  range: number;
+  price: number;
+  'max-number': number;
+  color: string;
+  'min-cart-value': number;
+}
 
+const App = (): JSX.Element => {
+  const [games, setGames] = useState<Game[]>([]);
+  const [selectedGame, setSelectedGame] = useState<Game>({
+    type: '',
+    description: '',
+    range: 10,
+    price: 20,
+    'max-number': 1,
+    color: '',
+    'min-cart-value': 1,
+  });
+  useEffect(() => {
+    fetch('http://localhost:3333/types')
+      .then((response) => response.json())
+      .then((data) => {
+        setGames(data);
+        setSelectedGame(data[0]);
+      });
+  }, []);
+  return (
+    <>
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/" exact>
+            <Main />
+          </Route>
+          <Route path="/create-game">
+            <CreateAGame />
+          </Route>
+          <Route path="/recent-games">
+            <RecentGame allGames={games} />
+          </Route>
+          <Route path="/reset-password">
+            <ResetPassword />
+          </Route>
+          <Route path="/sing-in">
+            <SingIn />
+          </Route>
+        </Switch>
+        <Footer />
+      </Router>
+      <ToastContainer />
+      <GlobalStyle />
+    </>
+  );
+};
 export default App;

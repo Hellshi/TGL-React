@@ -7,7 +7,7 @@ import NumberSelectors from './numberSelectors';
 import Button from './styles/button';
 import { CartItem } from './createAGameMain';
 
-interface Game {
+export interface Game {
   type: string;
   description: string;
   range: number;

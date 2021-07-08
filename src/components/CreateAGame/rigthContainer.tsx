@@ -34,6 +34,7 @@ const rigthContainer = ({
       toast.warning('Opa, adicione algum jogo ao carrinho primeiro!');
       return;
     }
+    toast.success('Jogo adicionado com sucesso!');
     dispatch(CartActions.buyGames(cart));
     setCart([]);
   };

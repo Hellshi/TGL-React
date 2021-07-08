@@ -20,21 +20,6 @@ const recentGameMainStyled = styled.div`
   }
 
   .selectors {
-    button {
-      border-style: solid;
-      border-radius: 20px;
-      padding: 5px;
-      background-color: white;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      outline: none;
-      min-width: 130px;
-      margin-left: 10px;
-    }
-  }
-
-  .selectors {
     display: flex;
     flex-direction: row;
     button {
