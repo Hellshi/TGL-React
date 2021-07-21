@@ -1,36 +1,41 @@
-import React, { useState } from 'react';
+/* eslint-disable no-console */
+import React, { useEffect, useState } from 'react';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector } from 'react-redux';
+import api from '../../services/api';
 import Button from '../CreateAGame/styles/button';
 import RecentGamesMainStyled from './styles/recentGamesMainStyled';
-import RecentGameComponent from './recentGameComponent';
+import RecentGameComponent, { RecentGames } from './recentGameComponent';
 import { Game } from '../CreateAGame/leftContainer';
 
-export interface games {
-  numbers: (number | string)[];
-  type: string;
-  color: string;
-  price: number;
-}
-
-interface RootState {
-  cart: {
-    buyedGames: games[];
-  };
-}
-
 const recentGameMain = ({ allGames }: { allGames: Game[] }): JSX.Element => {
-  const cart = useSelector((state: RootState) => state.cart.buyedGames);
   // eslint-disable-next-line no-console
-  console.log(cart);
   const [selectedGame, setSelectedGame] = useState('');
-  const [filteredCart, setFilteredCart] = useState(cart);
+  const [recentGames, setRecentGames] = useState<RecentGames[]>([]);
+  const [filteredCart, setFilteredCart] = useState(recentGames);
   const history = useHistory();
   const handleNewBet = () => {
     history.push('/create-game');
   };
+
+  useEffect(() => {
+    api.get('/bet/all-bets').then(({ data }) => {
+      setRecentGames(
+        data.map((item: RecentGames) => ({
+          ...item,
+          created_at: (() => {
+            const date = new Date(item.created_at);
+            return date.toLocaleDateString('pt-BR');
+          })(),
+        }))
+      );
+    });
+  }, []);
+
+  useEffect(() => {
+    setFilteredCart(recentGames);
+  }, [recentGames]);
 
   const filterGameHandler = (e: React.MouseEvent) => {
     let filter = e.currentTarget.id;
@@ -38,10 +43,12 @@ const recentGameMain = ({ allGames }: { allGames: Game[] }): JSX.Element => {
     if (filter !== '' && selectedGame === filter) {
       filter = '';
       setSelectedGame('');
-      setFilteredCart(cart);
+      setFilteredCart(recentGames);
       return;
     }
-    const filteredGames = cart.filter((item) => item.type === filter);
+    const filteredGames = recentGames.filter(
+      (item) => item.type.game_type === filter
+    );
     setFilteredCart(filteredGames);
   };
 
@@ -70,7 +77,7 @@ const recentGameMain = ({ allGames }: { allGames: Game[] }): JSX.Element => {
           </button>
         </div>
       </div>
-      <RecentGameComponent cart={filteredCart} />
+      <RecentGameComponent recentGames={filteredCart} />
     </RecentGamesMainStyled>
   );
 };

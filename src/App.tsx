@@ -28,6 +28,7 @@ const App = (): JSX.Element => {
   const auth = useSelector((state: RootState) => state.auth.isAuth);
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game>({
+    id: null,
     game_type: '',
     description: '',
     range: 10,

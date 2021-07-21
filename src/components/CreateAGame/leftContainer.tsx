@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +10,7 @@ import api from '../../services/api';
 import { CartItem } from './createAGameMain';
 
 export interface Game {
+  id: number | null;
   game_type: string;
   description: string;
   range: number;
@@ -27,6 +29,7 @@ const leftContainer = ({
 }): JSX.Element => {
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game>({
+    id: null,
     game_type: '',
     description: '',
     range: 10,
@@ -41,7 +44,6 @@ const leftContainer = ({
       setSelectedGame(data[0]);
     });
   }, []);
-
   const [selectedNumbers, setSelectedNumbers] = useState<(number | string)[]>(
     []
   );
@@ -82,6 +84,7 @@ const leftContainer = ({
     setCart((prevCart) => [
       ...prevCart,
       {
+        id: selectedGame.id,
         type: selectedGame.game_type,
         numbers: selectedNumbers,
         color: selectedGame.color,

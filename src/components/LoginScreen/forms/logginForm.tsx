@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import FormDiv from '../styles/login';
 import { AuthActions } from '../../../store/auth-slice';
 import api from '../../../services/api';
@@ -31,7 +32,8 @@ const logginForm: React.FC = () => {
         );
         api.defaults.headers.Authorization = `Bearer ${data.token.token}`;
         history.push('/create-game');
-      });
+      })
+      .catch(() => toast.error('Credenciais de usuário inválidas'));
   };
   return (
     <FormDiv>

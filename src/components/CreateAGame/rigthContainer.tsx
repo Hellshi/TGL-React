@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +9,7 @@ import Games from './games';
 import { CartActions } from '../../store/cart-slice';
 
 import { CartItem } from './createAGameMain';
+import api from '../../services/api';
 
 const rigthContainer = ({
   cart,
@@ -34,6 +36,7 @@ const rigthContainer = ({
       toast.warning('Opa, adicione algum jogo ao carrinho primeiro!');
       return;
     }
+    console.log(cart);
     if (totalPrice < 30) {
       toast.warning(
         'Opa, para completar essa ação seu carrinho deve ter um valor maior que R$30,00. Continue comprando e tente novamente'
@@ -42,6 +45,7 @@ const rigthContainer = ({
     }
     toast.success('Jogo adicionado com sucesso!');
     dispatch(CartActions.buyGames(cart));
+    api.post('/bet/new-bet', { games: cart });
     setCart([]);
   };
 

@@ -3,6 +3,7 @@ import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import SingInStyled from '../styles/singIn';
 import api from '../../../services/api';
 import { AuthActions } from '../../../store/auth-slice';
@@ -32,7 +33,8 @@ const singInForm: React.FC = () => {
         );
         api.defaults.headers.Authorization = `Bearer ${data.token.token}`;
         history.push('/create-game');
-      });
+      })
+      .catch(() => toast.error('Insira credenciais válidas'));
   };
 
   return (

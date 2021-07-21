@@ -1,25 +1,49 @@
-import React from 'react';
-import { games } from './recentGameMain';
+/* eslint-disable no-console */
+import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
 import RecentGameComponentStyled from './styles/recentGameComponentStyled';
 
-const recentGameComponent = ({ cart }: { cart: games[] }): JSX.Element => (
+export interface RecentGames {
+  id: number;
+  choosen_numbers: string;
+  user_id: number;
+  game_id: number;
+  price: number;
+  created_at: string;
+  type: {
+    id: number;
+    game_type: string;
+    description: string;
+    range: number;
+    price: number;
+    max_number: number;
+    color: string;
+    min_cart_value: number;
+  };
+}
+
+const recentGameComponent = ({
+  recentGames,
+}: {
+  recentGames: RecentGames[];
+}): JSX.Element => (
   <>
-    {cart.length === 0 ? (
+    {recentGames.length === 0 ? (
       <p> Opps, parece que não temos nenhum jogo aqui! </p>
     ) : (
-      cart.map((item) => (
-        <RecentGameComponentStyled color={item.color}>
+      recentGames.map((item) => (
+        <RecentGameComponentStyled color={item.type.color} key={item.id}>
           <div className="content">
-            <p className="numbers">{item.numbers.join(', ')}</p>
+            <p className="numbers">{item.choosen_numbers}</p>
             <span>
-              30/07/2025 - (
+              {item.created_at}- (
               {item.price.toLocaleString('pt-br', {
                 style: 'currency',
                 currency: 'BRL',
               })}
               )
             </span>
-            <span className="gameType">{item.type}</span>
+            <span className="gameType">{item.type.game_type}</span>
           </div>
         </RecentGameComponentStyled>
       ))
