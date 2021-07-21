@@ -16,16 +16,8 @@ import ResetPassword from './components/LoginScreen/resetPassword';
 import SingIn from './components/LoginScreen/singInMain';
 import GlobalStyle from './GlobalStyle';
 import 'react-toastify/dist/ReactToastify.css';
-
-export interface Game {
-  type: string;
-  description: string;
-  range: number;
-  price: number;
-  'max-number': number;
-  color: string;
-  'min-cart-value': number;
-}
+import api from './services/api';
+import { Game } from './components/CreateAGame/leftContainer';
 
 export interface RootState {
   auth: {
@@ -36,29 +28,27 @@ const App = (): JSX.Element => {
   const auth = useSelector((state: RootState) => state.auth.isAuth);
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game>({
-    type: '',
+    game_type: '',
     description: '',
     range: 10,
     price: 20,
-    'max-number': 1,
+    max_number: 1,
     color: '',
-    'min-cart-value': 1,
+    min_cart_value: 1,
   });
   useEffect(() => {
-    fetch('http://localhost:3333/types')
-      .then((response) => response.json())
-      .then((data) => {
-        setGames(data);
-        setSelectedGame(data[0]);
-      });
+    api('/all-games').then(({ data }) => {
+      setGames(data);
+      setSelectedGame(data[0]);
+    });
   }, []);
   return (
     <>
       <Router>
-        <Header />
+        {auth ? <Header /> : ''}
         <Switch>
           <Route path="/" exact>
-            <Main />
+            {auth ? <Redirect to="/recent-games" /> : <Main />}
           </Route>
           <Route path="/create-game">
             {!auth ? <Redirect to="/" /> : <CreateAGame />}
@@ -67,10 +57,10 @@ const App = (): JSX.Element => {
             {!auth ? <Redirect to="/" /> : <RecentGame allGames={games} />}
           </Route>
           <Route path="/reset-password">
-            <ResetPassword />
+            {auth ? <Redirect to="/" /> : <ResetPassword />}
           </Route>
           <Route path="/sing-in">
-            <SingIn />
+            {auth ? <Redirect to="/" /> : <SingIn />}
           </Route>
         </Switch>
         <Footer />

@@ -1,27 +1,50 @@
-import React from 'react';
+/* eslint-disable no-console */
+import React, { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch } from 'react-redux';
 import FormDiv from '../styles/login';
 import { AuthActions } from '../../../store/auth-slice';
+import api from '../../../services/api';
 
 const logginForm: React.FC = () => {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const history = useHistory();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    history.push('/create-game');
-    dispatch(AuthActions.auth());
-    history.push('/recent-games');
+    api
+      .post('/login', {
+        email: emailRef.current?.value,
+        password: passwordRef.current?.value,
+      })
+      .then(({ data }) => {
+        console.log(data);
+        dispatch(
+          AuthActions.login({
+            name: data.user.name,
+            email: data.user.email,
+            picture: data.user.picture,
+          })
+        );
+        api.defaults.headers.Authorization = `Bearer ${data.token.token}`;
+        history.push('/create-game');
+      });
   };
   return (
-    <FormDiv onSubmit={handleSubmit}>
+    <FormDiv>
       <h3>Authentication</h3>
       <div className="FormInput">
-        <form>
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
+        <form onSubmit={handleSubmit}>
+          <input type="email" placeholder="Email" required ref={emailRef} />
+          <input
+            type="password"
+            placeholder="Password"
+            required
+            ref={passwordRef}
+          />
           <div className="buttonsForm">
             <button
               type="button"

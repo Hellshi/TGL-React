@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Button from '../CreateAGame/styles/button';
 import RecentGamesMainStyled from './styles/recentGamesMainStyled';
 import RecentGameComponent from './recentGameComponent';
-import { Game } from '../../App';
+import { Game } from '../CreateAGame/leftContainer';
 
 export interface games {
   numbers: (number | string)[];
@@ -54,13 +54,13 @@ const recentGameMain = ({ allGames }: { allGames: Game[] }): JSX.Element => {
           {allGames.map((item) => (
             <Button
               type="button"
-              key={item.type}
-              id={item.type}
+              key={item.game_type}
+              id={item.game_type}
               color={item.color}
               onClick={filterGameHandler}
-              active={selectedGame === item.type ? 1 : 0}
+              active={selectedGame === item.game_type ? 1 : 0}
             >
-              {item.type}
+              {item.game_type}
             </Button>
           ))}
         </div>

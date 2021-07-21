@@ -5,16 +5,17 @@ import { toast } from 'react-toastify';
 import LeftContainer from './styles/leftContainer';
 import NumberSelectors from './numberSelectors';
 import Button from './styles/button';
+import api from '../../services/api';
 import { CartItem } from './createAGameMain';
 
 export interface Game {
-  type: string;
+  game_type: string;
   description: string;
   range: number;
   price: number;
-  'max-number': number;
+  max_number: number;
   color: string;
-  'min-cart-value': number;
+  min_cart_value: number;
 }
 
 const leftContainer = ({
@@ -26,21 +27,19 @@ const leftContainer = ({
 }): JSX.Element => {
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game>({
-    type: '',
+    game_type: '',
     description: '',
     range: 10,
     price: 20,
-    'max-number': 1,
+    max_number: 1,
     color: '',
-    'min-cart-value': 1,
+    min_cart_value: 1,
   });
   useEffect(() => {
-    fetch('http://localhost:3333/types')
-      .then((response) => response.json())
-      .then((data) => {
-        setGames(data);
-        setSelectedGame(data[0]);
-      });
+    api('/all-games').then(({ data }) => {
+      setGames(data);
+      setSelectedGame(data[0]);
+    });
   }, []);
 
   const [selectedNumbers, setSelectedNumbers] = useState<(number | string)[]>(
@@ -48,7 +47,7 @@ const leftContainer = ({
   );
 
   const handleSelect = (type: string) => {
-    const current = games.find((game: Game) => game.type === type);
+    const current = games.find((game: Game) => game.game_type === type);
     if (current) {
       setSelectedGame(current);
     }
@@ -57,7 +56,7 @@ const leftContainer = ({
 
   const generateRandomGameHandler = () => {
     const numbers = [];
-    while (numbers.length < selectedGame['max-number']) {
+    while (numbers.length < selectedGame.max_number) {
       const randomNumber = Math.floor(Math.random() * selectedGame.range);
 
       if (numbers.indexOf(randomNumber) === -1 && randomNumber > 0) {
@@ -72,10 +71,10 @@ const leftContainer = ({
   };
 
   const handleAddToCart = () => {
-    if (selectedNumbers.length < selectedGame['max-number']) {
+    if (selectedNumbers.length < selectedGame.max_number) {
       toast.error(
         `Opps, selecione mais ${
-          selectedGame['max-number'] - selectedNumbers.length
+          selectedGame.max_number - selectedNumbers.length
         } números para continuar!`
       );
       return;
@@ -83,7 +82,7 @@ const leftContainer = ({
     setCart((prevCart) => [
       ...prevCart,
       {
-        type: selectedGame.type,
+        type: selectedGame.game_type,
         numbers: selectedNumbers,
         color: selectedGame.color,
         price: selectedGame.price,
@@ -95,7 +94,7 @@ const leftContainer = ({
     <LeftContainer>
       <div className="title">
         <h2>
-          New bet for <span>{selectedGame.type}</span>
+          New bet for <span>{selectedGame.game_type}</span>
         </h2>
       </div>
 
@@ -106,13 +105,13 @@ const leftContainer = ({
           {games.map((game) => (
             <Button
               type="button"
-              id={game.type}
-              key={game.type}
+              id={game.game_type}
+              key={game.game_type}
               color={game.color}
-              onClick={() => handleSelect(game.type)}
-              active={selectedGame.type === game.type ? 1 : 0}
+              onClick={() => handleSelect(game.game_type)}
+              active={selectedGame.game_type === game.game_type ? 1 : 0}
             >
-              {game.type}
+              {game.game_type}
             </Button>
           ))}
         </div>
@@ -125,7 +124,7 @@ const leftContainer = ({
         <NumberSelectors
           selectedGame={selectedGame.range}
           color={selectedGame.color}
-          maxNumber={selectedGame['max-number']}
+          maxNumber={selectedGame.max_number}
           selectedNumbers={selectedNumbers}
           setSelectedNumbers={setSelectedNumbers}
         />
