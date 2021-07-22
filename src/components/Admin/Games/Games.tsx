@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   faTrash,
   faEdit,
@@ -14,6 +14,7 @@ import { Game } from '../../CreateAGame/leftContainer';
 const Games = (): JSX.Element => {
   const [games, setGames] = useState<Game[]>([]);
   const [editing, setEditting] = useState(false);
+  const [creating, setIsCreating] = useState(false);
 
   const [type, setType] = useState('');
   const [description, setDescription] = useState('');
@@ -72,12 +73,32 @@ const Games = (): JSX.Element => {
       });
   };
 
+  const handleCreateGame = (e: React.FormEvent) => {
+    e.preventDefault();
+    api
+      .post(`/admin/create-game`, {
+        game_type: type,
+        description,
+        range,
+        price,
+        max_number: maxNumber,
+        color,
+        min_cart_value: minCart,
+      })
+      .then(({ data }) => {
+        console.log(data);
+        toast.success('Jogo criado com sucesso');
+        setIsCreating(false);
+        loadGames();
+      });
+  };
+
   return (
     <>
       <GamesADMStyled>
-        {editing ? (
-          <form onSubmit={handleEditGame}>
-            <h2>Editar um jogo</h2>
+        {editing || creating ? (
+          <form onSubmit={editing ? handleEditGame : handleCreateGame}>
+            <h2>{editing ? 'Editar' : 'Criar'} um jogo</h2>
             <label htmlFor="type">
               Game Type{' '}
               <input
@@ -149,7 +170,7 @@ const Games = (): JSX.Element => {
             <label htmlFor="color">
               Color{' '}
               <input
-                type="text"
+                type="color"
                 id="color"
                 value={color}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -160,7 +181,10 @@ const Games = (): JSX.Element => {
             <div className="buttons">
               <button
                 type="button"
-                onClick={() => setEditting(false)}
+                onClick={() => {
+                  setEditting(false);
+                  setIsCreating(false);
+                }}
                 style={{ color: '#707070' }}
               >
                 Cancel
@@ -171,52 +195,62 @@ const Games = (): JSX.Element => {
             </div>
           </form>
         ) : (
-          games.map((game) => (
-            <div className="game">
-              <h2 style={{ color: game.color }}>{game.game_type}</h2>
-              <table>
-                <tr>
-                  <th>Description:</th>
-                  <td>{game.description}</td>
-                </tr>
-                <tr>
-                  <th>Range:</th>
-                  <td>{game.range}</td>
-                </tr>
-                <tr>
-                  <th>Price:</th>
-                  <td>
-                    {game.price.toLocaleString('pt-br', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    })}
-                  </td>
-                </tr>
-                <tr>
-                  <th>Min cart value:</th>
-                  <td>{game.min_cart_value}</td>
-                </tr>
-                <tr>
-                  <button type="button">
-                    <FontAwesomeIcon
-                      icon={faEdit}
-                      size="2x"
-                      onClick={() => handleEdit(game)}
-                    />
-                  </button>
-                </tr>
-                <tr>
-                  <button type="button">
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      size="2x"
-                      onClick={() => handleDelete(game.id)}
-                    />
-                  </button>
-                </tr>
-              </table>
-            </div>
-          ))
+          <>
+            {' '}
+            <button
+              type="button"
+              className="createAGame"
+              onClick={() => setIsCreating(true)}
+            >
+              Create a Game <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+            {games.map((game) => (
+              <div className="game">
+                <h2 style={{ color: game.color }}>{game.game_type}</h2>
+                <table>
+                  <tr>
+                    <th>Description:</th>
+                    <td>{game.description}</td>
+                  </tr>
+                  <tr>
+                    <th>Range:</th>
+                    <td>{game.range}</td>
+                  </tr>
+                  <tr>
+                    <th>Price:</th>
+                    <td>
+                      {game.price.toLocaleString('pt-br', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Min cart value:</th>
+                    <td>{game.min_cart_value}</td>
+                  </tr>
+                  <tr>
+                    <button type="button">
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        size="2x"
+                        onClick={() => handleEdit(game)}
+                      />
+                    </button>
+                  </tr>
+                  <tr>
+                    <button type="button">
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        size="2x"
+                        onClick={() => handleDelete(game.id)}
+                      />
+                    </button>
+                  </tr>
+                </table>
+              </div>
+            ))}
+          </>
         )}
       </GamesADMStyled>
     </>

@@ -116,6 +116,24 @@ const GamesAdm = styled.div`
       margin-left: 1rem;
     }
   }
+
+  .createAGame {
+    width: 100%;
+    border: none;
+    font-size: 2rem;
+    background-color: white;
+    font-size: 1.8rem;
+    background-color: transparent;
+    color: #b5c401;
+    font-weight: 900;
+    font-style: italic;
+    path {
+      color: #b5c401;
+    }
+    svg {
+      margin-left: 10px;
+    }
+  }
 `;
 
 export default GamesAdm;
