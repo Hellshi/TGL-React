@@ -27,6 +27,7 @@ export interface RootState {
     user: {
       name: string;
       email: string;
+      is_admin: boolean;
       picture: {
         created_at: string;
         file: string;

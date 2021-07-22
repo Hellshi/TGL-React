@@ -19,7 +19,35 @@ const AccountStyled = styled.div`
     flex-direction: column;
     border-color: teal;
     height: 100%;
-    width: 50%;
+    background-color: white;
+    align-self: center;
+    border-radius: 15px;
+    max-width: 45%;
+    height: 50%;
+    border: 1px solid #00000014;
+    padding: 10px 0 10px 0;
+    margin: 1rem 0 1rem 0;
+    background-color: white;
+  }
+
+  button {
+    cursor: pointer;
+  }
+  form button {
+    width: 100%;
+    border: none;
+    background-color: white;
+    font-size: 1.8rem;
+    background-color: transparent;
+    color: #b5c401;
+    font-weight: 900;
+    font-style: italic;
+    path {
+      color: #b5c401;
+    }
+    svg {
+      margin-left: 10px;
+    }
   }
 
   img {
@@ -73,10 +101,10 @@ const AccountStyled = styled.div`
     flex-direction: column;
     justify-content: space-between;
     button {
-      background-color: red;
+      background-color: #b71c1c;
       border-style: solid;
       color: white;
-      border-color: red;
+      border-color: #b71c1c;
       font-size: 1rem;
     }
   }

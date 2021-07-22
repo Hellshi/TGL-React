@@ -28,6 +28,7 @@ const logginForm: React.FC = () => {
             name: data.user.name,
             email: data.user.email,
             picture: data.user.picture,
+            is_admin: data.user.is_admin,
           })
         );
         api.defaults.headers.Authorization = `Bearer ${data.token.token}`;

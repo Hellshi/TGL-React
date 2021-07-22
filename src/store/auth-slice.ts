@@ -9,6 +9,7 @@ const authSlice = createSlice({
     user: {
       name: '',
       email: '',
+      is_admin: false,
       picture: {},
     },
   },
@@ -22,6 +23,7 @@ const authSlice = createSlice({
         name: '',
         email: '',
         picture: {},
+        is_admin: false,
       };
       state.isAuth = false;
     },

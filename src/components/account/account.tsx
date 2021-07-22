@@ -1,13 +1,18 @@
 /* eslint-disable no-console */
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
+import { AuthActions } from '../../store/auth-slice';
 import { RootState } from '../../App';
 import api from '../../services/api';
 import AccountStyled from './AccountStyled';
 
 const Account = (): JSX.Element => {
   const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const oldPasswordRef = useRef<HTMLInputElement>(null);
@@ -29,9 +34,12 @@ const Account = (): JSX.Element => {
         toast.success('Dados atualizados con sucesso');
       })
       .catch((error) => {
-        console.log(error);
-        toast.error(`Opps ${error}`);
+        toast.error(error.response.data.error.message);
       });
+  };
+
+  const handleDeleteProfile = () => {
+    api.delete('/user/delete').then(() => dispatch(AuthActions.logout()));
   };
 
   return (
@@ -51,7 +59,9 @@ const Account = (): JSX.Element => {
         <div className="informations">
           <h2>{user.name}</h2>
           <p>{user.email}</p>
-          <button type="button">Delete Profile</button>
+          <button type="button" onClick={handleDeleteProfile}>
+            Delete Profile
+          </button>
         </div>
       </div>
 
@@ -71,7 +81,9 @@ const Account = (): JSX.Element => {
             placeholder="Confirm Password"
             ref={confirmPasswordRef}
           />
-          <button type="submit">Submit</button>
+          <button type="submit">
+            Submit <FontAwesomeIcon icon={faArrowRight} />
+          </button>
         </form>
       </div>
     </AccountStyled>
