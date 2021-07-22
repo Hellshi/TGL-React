@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const recentGameMainStyled = styled.div`
-  padding: 0rem 5rem;
+  padding: 4rem 5rem;
   min-height: 60vh;
   .topSelectors {
     display: flex;

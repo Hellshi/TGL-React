@@ -15,6 +15,7 @@ import RecentGame from './components/RecentGames/recentGameMain';
 import ResetPassword from './components/LoginScreen/resetPassword';
 import SingIn from './components/LoginScreen/singInMain';
 import GlobalStyle from './GlobalStyle';
+import Reset from './components/LoginScreen/reset';
 import 'react-toastify/dist/ReactToastify.css';
 import api from './services/api';
 import { Game } from './components/CreateAGame/leftContainer';
@@ -38,7 +39,7 @@ const App = (): JSX.Element => {
     min_cart_value: 1,
   });
   useEffect(() => {
-    api('/all-games').then(({ data }) => {
+    api(`/all-games`).then(({ data }) => {
       setGames(data);
       setSelectedGame(data[0]);
     });
@@ -46,7 +47,7 @@ const App = (): JSX.Element => {
   return (
     <>
       <Router>
-        {auth ? <Header /> : ''}
+        {auth ? <Header /> : <header style={{ marginBottom: 'auto' }} />}
         <Switch>
           <Route path="/" exact>
             {auth ? <Redirect to="/recent-games" /> : <Main />}
@@ -62,6 +63,9 @@ const App = (): JSX.Element => {
           </Route>
           <Route path="/sing-in">
             {auth ? <Redirect to="/" /> : <SingIn />}
+          </Route>
+          <Route path="/reset/:token">
+            {auth ? <Redirect to="/" /> : <Reset />}
           </Route>
         </Switch>
         <Footer />

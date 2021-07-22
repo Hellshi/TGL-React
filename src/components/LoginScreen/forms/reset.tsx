@@ -1,28 +1,30 @@
 import React, { useRef } from 'react';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { toast } from 'react-toastify';
+import { useHistory, useParams } from 'react-router';
 import ResetPasswordStyled from '../styles/resetPassword';
 import api from '../../../services/api';
 
-const resetPassword: React.FC = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
+const Reset: React.FC = () => {
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const history = useHistory();
+  const { token } = useParams<{ token: string }>();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     api
-      .post('/reset', { email: emailRef.current?.value })
-      .then(() =>
-        toast.success(
-          'Um email foi enviado com um token de verificação. Cheque sua caixa postal'
-        )
-      );
+      .post(`/reset/${token}`, {
+        password: passwordRef.current?.value,
+      })
+      .then(() => {
+        history.push('/');
+      });
   };
   return (
     <ResetPasswordStyled>
       <h3>Reset Password</h3>
       <div className="FormInput">
         <form onSubmit={handleSubmit}>
-          <input type="email" placeholder="Email" ref={emailRef} />
+          <input type="password" placeholder="New password" ref={passwordRef} />
           <div className="buttonsForm">
             <button type="submit">
               Send Link <FontAwesomeIcon icon={faArrowRight} />
@@ -38,4 +40,4 @@ const resetPassword: React.FC = () => {
     </ResetPasswordStyled>
   );
 };
-export default resetPassword;
+export default Reset;
