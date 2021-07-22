@@ -13,6 +13,8 @@ import Main from './components/LoginScreen/main';
 import CreateAGame from './components/CreateAGame/createAGameMain';
 import RecentGame from './components/RecentGames/recentGameMain';
 import ResetPassword from './components/LoginScreen/resetPassword';
+import Games from './components/Admin/Games/Games';
+import Users from './components/Admin/Users/Users';
 import SingIn from './components/LoginScreen/singInMain';
 import GlobalStyle from './GlobalStyle';
 import Reset from './components/LoginScreen/reset';
@@ -45,9 +47,10 @@ export interface RootState {
 }
 const App = (): JSX.Element => {
   const auth = useSelector((state: RootState) => state.auth.isAuth);
+  const isAdmin = useSelector((state: RootState) => state.auth.user.is_admin);
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game>({
-    id: null,
+    id: 0,
     game_type: '',
     description: '',
     range: 10,
@@ -87,6 +90,12 @@ const App = (): JSX.Element => {
           </Route>
           <Route path="/profile">
             {!auth ? <Redirect to="/" /> : <Account />}
+          </Route>
+          <Route path="/users">
+            {!auth && !isAdmin ? <Redirect to="/" /> : <Users />}
+          </Route>
+          <Route path="/games">
+            {!auth && !isAdmin ? <Redirect to="/" /> : <Games />}
           </Route>
         </Switch>
         <Footer />

@@ -10,7 +10,7 @@ import api from '../../services/api';
 import { CartItem } from './createAGameMain';
 
 export interface Game {
-  id: number | null;
+  id: number;
   game_type: string;
   description: string;
   range: number;
@@ -29,7 +29,7 @@ const leftContainer = ({
 }): JSX.Element => {
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game>({
-    id: null,
+    id: 0,
     game_type: '',
     description: '',
     range: 10,
