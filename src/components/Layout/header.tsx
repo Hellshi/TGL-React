@@ -19,10 +19,10 @@ const Header: React.FC = () => {
           TGL
           <Menu onClick={() => setIsOpen(!open)} />
         </a>
-        <Link to="/">Home</Link>
+        <Link to="/recent-games">Home</Link>
       </div>
       <div className="rightBox">
-        <Link to="/recent-games">Account</Link>
+        <Link to="/profile">Account</Link>
         <Link to="/" onClick={handleLogOut}>
           LogOut
         </Link>

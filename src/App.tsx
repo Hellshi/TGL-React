@@ -16,6 +16,7 @@ import ResetPassword from './components/LoginScreen/resetPassword';
 import SingIn from './components/LoginScreen/singInMain';
 import GlobalStyle from './GlobalStyle';
 import Reset from './components/LoginScreen/reset';
+import Account from './components/account/account';
 import 'react-toastify/dist/ReactToastify.css';
 import api from './services/api';
 import { Game } from './components/CreateAGame/leftContainer';
@@ -23,6 +24,22 @@ import { Game } from './components/CreateAGame/leftContainer';
 export interface RootState {
   auth: {
     isAuth: boolean;
+    user: {
+      name: string;
+      email: string;
+      picture: {
+        created_at: string;
+        file: string;
+        id: number;
+        name: string;
+        subtype: string;
+        type: string;
+        updated_at: string;
+        url: string;
+        user_id: number;
+      };
+      password: string;
+    };
   };
 }
 const App = (): JSX.Element => {
@@ -66,6 +83,9 @@ const App = (): JSX.Element => {
           </Route>
           <Route path="/reset/:token">
             {auth ? <Redirect to="/" /> : <Reset />}
+          </Route>
+          <Route path="/profile">
+            {!auth ? <Redirect to="/" /> : <Account />}
           </Route>
         </Switch>
         <Footer />

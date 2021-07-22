@@ -1,6 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { stat } from 'fs';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -9,19 +9,19 @@ const authSlice = createSlice({
     user: {
       name: '',
       email: '',
-      picture: '',
+      picture: {},
     },
   },
   reducers: {
     login(state, action) {
-      state.user = action.payload.user;
+      state.user = action.payload;
       state.isAuth = true;
     },
     logout(state) {
       state.user = {
         name: '',
         email: '',
-        picture: '',
+        picture: {},
       };
       state.isAuth = false;
     },
