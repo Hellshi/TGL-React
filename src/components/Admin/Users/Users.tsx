@@ -31,28 +31,31 @@ interface User {
 
 const Users = (): JSX.Element => {
   const [users, setUsers] = useState<User[]>([]);
-  useEffect(() => {
+  const loadUsers = () => {
     api.get('/admin/all-users').then(({ data }) => {
       setUsers(data);
     });
-  }, [users]);
+  };
+  useEffect(() => {
+    loadUsers();
+  }, []);
 
   const handlePromote = (id: number, isAdmin: boolean) => {
-    api
-      .put(`/admin/promote-user/${id}`)
-      .then(() =>
-        toast.warn(
-          isAdmin
-            ? 'Usuário removido do time de admin'
-            : 'Usuário promovido a Admin'
-        )
+    api.put(`/admin/promote-user/${id}`).then(() => {
+      toast.warn(
+        isAdmin
+          ? 'Usuário removido do time de admin'
+          : 'Usuário promovido a Admin'
       );
+      loadUsers();
+    });
   };
 
   const handleDelete = (id: number) => {
-    api
-      .delete(`/admin/delete-user/${id}`)
-      .then(() => toast.warn('usuário deletado com sucesso'));
+    api.delete(`/admin/delete-user/${id}`).then(() => {
+      toast.warn('usuário deletado com sucesso');
+      loadUsers();
+    });
   };
 
   return (
@@ -73,9 +76,6 @@ const Users = (): JSX.Element => {
             <h3>{user.name}</h3>
             <p>{user.email}</p>
           </div>
-          <button type="button" onClick={() => handleDelete(user.id)}>
-            <FontAwesomeIcon icon={faUserTimes} size="2x" />
-          </button>
           <button
             type="button"
             onClick={() => handlePromote(user.id, user.is_admin)}
@@ -85,6 +85,9 @@ const Users = (): JSX.Element => {
             ) : (
               <FontAwesomeIcon icon={faUserTie} size="2x" />
             )}
+          </button>{' '}
+          <button type="button" onClick={() => handleDelete(user.id)}>
+            <FontAwesomeIcon icon={faUserTimes} size="2x" />
           </button>
         </div>
       ))}
