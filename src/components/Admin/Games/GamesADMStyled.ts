@@ -37,7 +37,7 @@ const GamesAdm = styled.div`
     display: flex;
     justify-content: space-around;
     flex: 0.5;
-    min-width: 32rem;
+    max-width: 100%;
     padding: 1rem;
     border: 1px solid #e2e2e2;
     border-radius: 25px;
@@ -116,6 +116,10 @@ const GamesAdm = styled.div`
       margin-left: 1rem;
     }
   }
+  .buttons {
+    flex-direction: row;
+    gap: 2.5rem;
+  }
 
   .createAGame {
     width: 100%;
@@ -132,6 +136,24 @@ const GamesAdm = styled.div`
     }
     svg {
       margin-left: 10px;
+    }
+  }
+  @media (max-width: 1024px) {
+    table {
+      display: table-cell;
+      text-align: left;
+      border-bottom: none;
+      button {
+        margin-bottom: 2rem;
+      }
+      .buttons {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      td {
+        margin-bottom: 15px;
+        text-align: inherit;
+      }
     }
   }
 `;

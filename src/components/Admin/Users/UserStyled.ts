@@ -45,6 +45,22 @@ const UsersMain = styled.div`
     border-color: transparent;
     background-color: transparent;
   }
+
+  .buttons {
+    display: flex;
+    gap: 1rem;
+  }
+
+  @media (max-width: 1024px) {
+    justify-content: center;
+
+    .user {
+      flex-direction: column;
+      min-width: 100%;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
 `;
 
 export default UsersMain;

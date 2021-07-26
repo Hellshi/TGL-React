@@ -17,7 +17,7 @@ const SingInStyled = styled.div`
     background-color: white;
     align-self: center;
     border-radius: 15px;
-    width: 45%;
+    min-width: 45%;
     height: 60%;
     border: 1px solid #00000014;
     padding: 10px 0 10px 0;
@@ -82,6 +82,12 @@ const SingInStyled = styled.div`
     svg {
       background-color: transparent;
       margin-right: 10px;
+    }
+  }
+  @media (max-width: 1024px) {
+    button,
+    form button {
+      font-size: 1.3rem;
     }
   }
 `;

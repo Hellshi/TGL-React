@@ -2,11 +2,13 @@ import React, { useRef } from 'react';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router';
 import ResetPasswordStyled from '../styles/resetPassword';
 import api from '../../../services/api';
 
 const resetPassword: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
+  const history = useHistory();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     api
@@ -31,7 +33,7 @@ const resetPassword: React.FC = () => {
         </form>
       </div>
 
-      <button type="button">
+      <button type="button" onClick={() => history.push('/')}>
         <FontAwesomeIcon icon={faArrowLeft} />
         Back
       </button>

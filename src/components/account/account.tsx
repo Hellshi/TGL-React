@@ -3,12 +3,19 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
 import { AuthActions } from '../../store/auth-slice';
 import { RootState } from '../../App';
 import api from '../../services/api';
 import AccountStyled from './AccountStyled';
+
+interface data {
+  id: number;
+  email: string;
+  is_admin: boolean;
+  name: string;
+  token: string;
+}
 
 const Account = (): JSX.Element => {
   const user = useSelector((state: RootState) => state.auth.user);

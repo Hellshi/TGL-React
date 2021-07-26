@@ -229,7 +229,7 @@ const Games = (): JSX.Element => {
                     <th>Min cart value:</th>
                     <td>{game.min_cart_value}</td>
                   </tr>
-                  <tr>
+                  <tr className="buttons">
                     <button type="button">
                       <FontAwesomeIcon
                         icon={faEdit}
@@ -237,8 +237,6 @@ const Games = (): JSX.Element => {
                         onClick={() => handleEdit(game)}
                       />
                     </button>
-                  </tr>
-                  <tr>
                     <button type="button">
                       <FontAwesomeIcon
                         icon={faTrash}

@@ -22,7 +22,6 @@ const logginForm: React.FC = () => {
         password: passwordRef.current?.value,
       })
       .then(({ data }) => {
-        console.log(data.user.name);
         dispatch(
           AuthActions.login({
             name: data.user.name,

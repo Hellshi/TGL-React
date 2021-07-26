@@ -63,7 +63,6 @@ const Users = (): JSX.Element => {
       <h1>Users</h1>
       {users.map((user) => (
         <div key={user.id} className="user">
-          {user.is_admin ? <h2>Admin</h2> : ''}
           <img
             src={
               user.picture
@@ -75,20 +74,34 @@ const Users = (): JSX.Element => {
           <div className="content">
             <h3>{user.name}</h3>
             <p>{user.email}</p>
-          </div>
-          <button
-            type="button"
-            onClick={() => handlePromote(user.id, user.is_admin)}
-          >
             {user.is_admin ? (
-              <FontAwesomeIcon icon={faUserSlash} size="2x" />
+              <p
+                style={{
+                  color: '#8d990b',
+                  fontWeight: 'bold',
+                }}
+              >
+                Admin
+              </p>
             ) : (
-              <FontAwesomeIcon icon={faUserTie} size="2x" />
+              ''
             )}
-          </button>{' '}
-          <button type="button" onClick={() => handleDelete(user.id)}>
-            <FontAwesomeIcon icon={faUserTimes} size="2x" />
-          </button>
+          </div>
+          <div className="buttons">
+            <button
+              type="button"
+              onClick={() => handlePromote(user.id, user.is_admin)}
+            >
+              {user.is_admin ? (
+                <FontAwesomeIcon icon={faUserSlash} size="2x" />
+              ) : (
+                <FontAwesomeIcon icon={faUserTie} size="2x" />
+              )}
+            </button>{' '}
+            <button type="button" onClick={() => handleDelete(user.id)}>
+              <FontAwesomeIcon icon={faUserTimes} size="2x" />
+            </button>
+          </div>
         </div>
       ))}
     </UsersMain>

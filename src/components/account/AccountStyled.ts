@@ -22,7 +22,7 @@ const AccountStyled = styled.div`
     background-color: white;
     align-self: center;
     border-radius: 15px;
-    max-width: 45%;
+    min-width: 45%;
     height: 50%;
     border: 1px solid #00000014;
     padding: 10px 0 10px 0;
@@ -106,6 +106,17 @@ const AccountStyled = styled.div`
       color: white;
       border-color: #b71c1c;
       font-size: 1rem;
+    }
+  }
+  @media (max-width: 1024px) {
+    .main {
+      flex-direction: column;
+    }
+    .informations {
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
     }
   }
 `;

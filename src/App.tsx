@@ -48,23 +48,7 @@ export interface RootState {
 const App = (): JSX.Element => {
   const auth = useSelector((state: RootState) => state.auth.isAuth);
   const isAdmin = useSelector((state: RootState) => state.auth.user.is_admin);
-  const [games, setGames] = useState<Game[]>([]);
-  const [selectedGame, setSelectedGame] = useState<Game>({
-    id: 0,
-    game_type: '',
-    description: '',
-    range: 10,
-    price: 20,
-    max_number: 1,
-    color: '',
-    min_cart_value: 1,
-  });
-  useEffect(() => {
-    api(`/all-games`).then(({ data }) => {
-      setGames(data);
-      setSelectedGame(data[0]);
-    });
-  }, []);
+
   return (
     <>
       <Router>
@@ -77,7 +61,7 @@ const App = (): JSX.Element => {
             {!auth ? <Redirect to="/" /> : <CreateAGame />}
           </Route>
           <Route path="/recent-games">
-            {!auth ? <Redirect to="/" /> : <RecentGame allGames={games} />}
+            {!auth ? <Redirect to="/" /> : <RecentGame />}
           </Route>
           <Route path="/reset-password">
             {auth ? <Redirect to="/" /> : <ResetPassword />}

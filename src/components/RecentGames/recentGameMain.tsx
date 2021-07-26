@@ -9,8 +9,13 @@ import RecentGamesMainStyled from './styles/recentGamesMainStyled';
 import RecentGameComponent, { RecentGames } from './recentGameComponent';
 import { Game } from '../CreateAGame/leftContainer';
 
-const recentGameMain = ({ allGames }: { allGames: Game[] }): JSX.Element => {
-  // eslint-disable-next-line no-console
+const recentGameMain = (): JSX.Element => {
+  const [allGames, setAllGames] = useState<Game[]>([]);
+  useEffect(() => {
+    api(`/all-games`).then(({ data }) => {
+      setAllGames(data);
+    });
+  }, []);
   const [selectedGame, setSelectedGame] = useState('');
   const [recentGames, setRecentGames] = useState<RecentGames[]>([]);
   const [filteredCart, setFilteredCart] = useState(recentGames);

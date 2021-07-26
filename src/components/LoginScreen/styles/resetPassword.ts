@@ -16,7 +16,7 @@ const ResetPassword = styled.div`
   .FormInput {
     align-self: center;
     border-radius: 15px;
-    width: 45%;
+    min-width: 45%;
     border: 1px solid #00000014;
     padding: 10px 0 10px 0;
     margin: 1rem 0 1rem 0;
@@ -77,6 +77,13 @@ const ResetPassword = styled.div`
     background-color: transparent;
     svg {
       margin-right: 10px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    button,
+    form button {
+      font-size: 1.3rem;
     }
   }
 `;

@@ -35,7 +35,9 @@ const singInForm: React.FC = () => {
         api.defaults.headers.Authorization = `Bearer ${data.token.token}`;
         history.push('/create-game');
       })
-      .catch(() => toast.error('Insira credenciais válidas'));
+      .catch((error) => {
+        toast.error(error.response.data.error.message);
+      });
   };
 
   return (
