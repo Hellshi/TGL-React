@@ -15,29 +15,28 @@ const singInForm: React.FC = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const history = useHistory();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    api
-      .post('/user/create', {
+    try {
+      const postRespnse = await api.post('/user/create', {
         email: emailRef.current?.value,
         password: passwordRef.current?.value,
         name: nameRef.current?.value,
-      })
-      .then(({ data }) => {
-        dispatch(
-          AuthActions.login({
-            name: data.user.name,
-            email: data.user.email,
-            picture: data.user.picture,
-            is_admin: data.user.is_admin,
-          })
-        );
-        api.defaults.headers.Authorization = `Bearer ${data.token.token}`;
-        history.push('/create-game');
-      })
-      .catch((error) => {
-        toast.error(error.response.data.error.message);
       });
+      const { data } = postRespnse;
+      dispatch(
+        AuthActions.login({
+          name: data.user.name,
+          email: data.user.email,
+          picture: data.user.picture,
+          is_admin: data.user.is_admin,
+        })
+      );
+      api.defaults.headers.Authorization = `Bearer ${data.token.token}`;
+      history.push('/create-game');
+    } catch (error) {
+      toast.error(error.response.data.error.message);
+    }
   };
 
   return (

@@ -14,26 +14,27 @@ const logginForm: React.FC = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const history = useHistory();
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    api
-      .post('/login', {
+    try {
+      const postResponse = await api.post('/login', {
         email: emailRef.current?.value,
         password: passwordRef.current?.value,
-      })
-      .then(({ data }) => {
-        dispatch(
-          AuthActions.login({
-            name: data.user.name,
-            email: data.user.email,
-            picture: data.user.picture,
-            is_admin: data.user.is_admin,
-          })
-        );
-        api.defaults.headers.Authorization = `Bearer ${data.token.token}`;
-        history.push('/create-game');
-      })
-      .catch(() => toast.error('Credenciais de usuário inválidas'));
+      });
+      const { data } = postResponse;
+      dispatch(
+        AuthActions.login({
+          name: data.user.name,
+          email: data.user.email,
+          picture: data.user.picture,
+          is_admin: data.user.is_admin,
+        })
+      );
+      api.defaults.headers.Authorization = `Bearer ${data.token.token}`;
+      history.push('/create-game');
+    } catch (error) {
+      toast.error('Credenciais de usuário inválidas');
+    }
   };
   return (
     <FormDiv>

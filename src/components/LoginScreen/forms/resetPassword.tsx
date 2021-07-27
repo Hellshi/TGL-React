@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useRef } from 'react';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,15 +10,16 @@ import api from '../../../services/api';
 const resetPassword: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const history = useHistory();
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    api
-      .post('/reset', { email: emailRef.current?.value })
-      .then(() =>
-        toast.success(
-          'Um email foi enviado com um token de verificação. Cheque sua caixa postal'
-        )
+    try {
+      await api.post('/reset', { email: emailRef.current?.value });
+      toast.success(
+        'Um email foi enviado com um token de verificação. Cheque sua caixa postal'
       );
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <ResetPasswordStyled>

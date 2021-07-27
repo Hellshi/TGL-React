@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useRef } from 'react';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,15 +10,16 @@ const Reset: React.FC = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const history = useHistory();
   const { token } = useParams<{ token: string }>();
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    api
-      .post(`/reset/${token}`, {
+    try {
+      await api.post(`/reset/${token}`, {
         password: passwordRef.current?.value,
-      })
-      .then(() => {
-        history.push('/');
       });
+      history.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <ResetPasswordStyled>

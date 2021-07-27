@@ -25,18 +25,26 @@ const Games = (): JSX.Element => {
   const [color, setColor] = useState('');
   const [Gameid, setGameId] = useState(0);
 
-  const loadGames = () => {
-    api.get('/all-games').then(({ data }) => setGames(data));
+  const loadGames = async () => {
+    try {
+      const getResponse = await api.get('/all-games');
+      setGames(getResponse.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     loadGames();
   }, []);
 
-  const handleDelete = (id: number) => {
-    api.delete(`/admin/delete-game/${id}`).then(() => {
+  const handleDelete = async (id: number) => {
+    try {
+      await api.delete(`/admin/delete-game/${id}`);
       toast.warn('Game deleted');
       loadGames();
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleEdit = (game: Game) => {

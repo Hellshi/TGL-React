@@ -24,18 +24,22 @@ const recentGameMain = (): JSX.Element => {
     history.push('/create-game');
   };
 
+  const getGames = async () => {
+    const getResponse = await api.get('/bet/all-bets');
+    const { data } = getResponse;
+    setRecentGames(
+      data.map((item: RecentGames) => ({
+        ...item,
+        created_at: (() => {
+          const date = new Date(item.created_at);
+          return date.toLocaleDateString('pt-BR');
+        })(),
+      }))
+    );
+  };
+
   useEffect(() => {
-    api.get('/bet/all-bets').then(({ data }) => {
-      setRecentGames(
-        data.map((item: RecentGames) => ({
-          ...item,
-          created_at: (() => {
-            const date = new Date(item.created_at);
-            return date.toLocaleDateString('pt-BR');
-          })(),
-        }))
-      );
-    });
+    getGames();
   }, []);
 
   useEffect(() => {

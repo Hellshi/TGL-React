@@ -31,31 +31,28 @@ interface User {
 
 const Users = (): JSX.Element => {
   const [users, setUsers] = useState<User[]>([]);
-  const loadUsers = () => {
-    api.get('/admin/all-users').then(({ data }) => {
-      setUsers(data);
-    });
+  const loadUsers = async () => {
+    const getResponse = await api.get('/admin/all-users');
+    setUsers(getResponse.data);
   };
   useEffect(() => {
     loadUsers();
   }, []);
 
-  const handlePromote = (id: number, isAdmin: boolean) => {
-    api.put(`/admin/promote-user/${id}`).then(() => {
-      toast.warn(
-        isAdmin
-          ? 'Usuário removido do time de admin'
-          : 'Usuário promovido a Admin'
-      );
-      loadUsers();
-    });
+  const handlePromote = async (id: number, isAdmin: boolean) => {
+    await api.put(`/admin/promote-user/${id}`);
+    toast.warn(
+      isAdmin
+        ? 'Usuário removido do time de admin'
+        : 'Usuário promovido a Admin'
+    );
+    loadUsers();
   };
 
-  const handleDelete = (id: number) => {
-    api.delete(`/admin/delete-user/${id}`).then(() => {
-      toast.warn('usuário deletado com sucesso');
-      loadUsers();
-    });
+  const handleDelete = async (id: number) => {
+    await api.delete(`/admin/delete-user/${id}`);
+    toast.warn('usuário deletado com sucesso');
+    loadUsers();
   };
 
   return (

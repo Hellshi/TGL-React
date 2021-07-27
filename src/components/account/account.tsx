@@ -26,27 +26,29 @@ const Account = (): JSX.Element => {
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    api
-      .put('/user/update', {
+    try {
+      const PutResponse = await api.put('/user/update', {
         email: emailRef.current?.value,
         oldPassword: oldPasswordRef.current?.value,
         password: passwordRef.current?.value,
         ConfirmPassword: confirmPasswordRef.current?.value,
         name: nameRef.current?.value,
-      })
-      .then(() => {
-        toast.success('Dados atualizados con sucesso');
-      })
-      .catch((error) => {
-        toast.error(error.response.data.error.message);
       });
+      toast.success('Dados atualizados con sucesso');
+    } catch (error) {
+      toast.error(error.response.data.error.message);
+    }
   };
 
-  const handleDeleteProfile = () => {
-    api.delete('/user/delete').then(() => dispatch(AuthActions.logout()));
+  const handleDeleteProfile = async () => {
+    try {
+      const response = await api.delete('/user/delete');
+      dispatch(AuthActions.logout());
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
